@@ -1,0 +1,57 @@
+buildscript {
+    ext { springBootVersion = '2.2.2.RELEASE' }
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins { id "io.spring.dependency-management" version "1.0.6.RELEASE" }
+
+ext { springBootVersion = '2.2.2.RELEASE' }
+
+repositories {
+    jcenter()
+}
+
+version = '1.0'
+
+configure(allprojects - project(':frontend')) {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile project(':backend')
+}
+
+bootJar {
+    launchScript()
+    mainClassName "org.skeleton.BackendApp"
+
+    // Bundle the frontend
+    from('./frontend/build') {
+        into 'static'
+    }
+}
+
+bootJar.dependsOn(':frontend:bundle')
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
+}
+

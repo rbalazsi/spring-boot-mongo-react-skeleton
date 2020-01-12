@@ -1,0 +1,46 @@
+### General
+server:
+  servlet:
+    context-path: /
+
+
+### Security
+security:
+
+  # Admin
+  admin:
+    first-name: John
+    last-name: Admin
+    email: admin@skeleton.org
+    # TODO: remove this - pass: admin1
+    password: $2a$10$/g7ztWbnfRBFgSBZ3n7eSOn25c3WEnSy65gsgKqZM2I/qEMk9dHly
+
+  # Oauth2
+  oauth2:
+    client:
+      client-id: skeleton_app
+      client-secret: s3crEt
+      authorized-grant-types:
+      - password
+      - refresh_token
+      authorities: ROLE_USER
+      scope:
+      - read
+      - write
+      auto-approve: true
+      access-token-validity-seconds: 600
+      refresh-token-validity-seconds: 300000
+
+
+### Spring
+spring:
+
+  data:
+    rest:
+      base-path: /api
+    mongodb:
+      database: skeleton
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
