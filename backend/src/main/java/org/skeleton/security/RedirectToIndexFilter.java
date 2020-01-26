@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 public class RedirectToIndexFilter implements Filter {
 
-    private static final List<String> WHITE_LIST = Arrays.asList("/oauth", "/api", "/static", "/icons", "/track");
+    private static final List<String> WHITE_LIST = Arrays.asList("/oauth", "/api", "/static");
 
     @Override
     public void doFilter(ServletRequest request,
@@ -31,7 +31,7 @@ public class RedirectToIndexFilter implements Filter {
         String requestURI = req.getRequestURI();
 
         for (String whiteListed : WHITE_LIST) {
-            if (requestURI.startsWith(whiteListed)) {
+            if (requestURI.startsWith(whiteListed) || requestURI.endsWith(".js")) {
                 chain.doFilter(request, response);
                 return;
             }

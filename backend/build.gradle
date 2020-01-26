@@ -28,7 +28,7 @@ dependencies {
     compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE') {
         exclude group: 'com.sun.xml.bind', module: '*'
     }
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.10.2'
     compile 'org.springframework.boot:spring-boot-devtools'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'

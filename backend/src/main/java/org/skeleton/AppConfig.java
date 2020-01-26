@@ -11,5 +11,4 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackageClasses = {ContactRepository.class})
 public class AppConfig {
 
-
 }

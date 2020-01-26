@@ -5,6 +5,7 @@ import org.skeleton.repository.ContactRepository;
 import org.skeleton.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static org.skeleton.rest.Versions.V1_JSON;
 
 /**
  * Endpoint for managing a list of contacts.
@@ -37,7 +40,7 @@ public class ContactResource {
      * @param authentication the auth object
      * @return the list of contacts
      */
-    @GetMapping
+    @GetMapping(produces = {V1_JSON, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ApiResult<List<Contact>>> getAll(Authentication authentication) {
         String userID = AuthUtils.extractUserID(authentication);
         List<Contact> contacts = contactRepository.findAllByUserId(userID);
