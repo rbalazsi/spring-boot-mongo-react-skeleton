@@ -3,6 +3,7 @@
  */
 
 import jwtDecode from "jwt-decode";
+import {VERSIONED_JSON_MIME_TYPE} from "./constants";
 
 export const getRefreshToken = () => {
     return localStorage.getItem("refresh_token");
@@ -30,6 +31,11 @@ export const isUserAuthenticated = (state) => {
 export const withAuth = (headers = {}) => ({
     ...headers,
     'Authorization': `Bearer ${getAccessToken()}`
+});
+
+export const jsonWithAuth = () => withAuth({
+    'Accept': VERSIONED_JSON_MIME_TYPE,
+    'Content-Type': VERSIONED_JSON_MIME_TYPE
 });
 
 export const hasAdminRole = () => {
